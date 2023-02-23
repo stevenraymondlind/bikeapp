@@ -275,11 +275,11 @@ app.get("/locations", (req, res) => {
     res.json(result.rows);
   });
 });
-
+// this is for returning bikes
 app.get("/bikes2/:location_id", async (req, res) => {
   const location_id = req.params.location_id;
   const query = `SELECT id, name, location_id from bikes 
-  where location_id = ${location_id} AND id NOT IN (SELECT bike_id from rentals);`;
+  where location_id = ${location_id} and available = true and damage = false`;
   try {
     const result = await db.query(query);
     res.json(result.rows);
@@ -299,7 +299,11 @@ app.get("/rentals/:bike_code", async (req, res) => {
       "SELECT location_id, bike_id FROM rentals WHERE bike_code = $1",
       [bike_code]
     );
-
+    console.log(result);
+    await db.query(
+      "UPDATE bikes SET location_id = $1, available = false WHERE id = $2 RETURNING *",
+      [result.rows[0].location_id, result.rows[0].bike_id]
+    );
     res.json(result.rows[0]);
   } catch (err) {
     res.status(500).send("Bike Code error");
@@ -317,25 +321,29 @@ app.put("/rentals/:bike_code", async (req, res) => {
       [bike_code]
     );
 
-    await db.query(
-      "UPDATE bikes SET available = false WHERE id = $1 RETURNING *",
-      [result.bike_id]
-    );
     res.json(result.rows[0]);
   } catch (err) {
     res.status(500).send("Error returning bike");
   }
 });
-
+// this is the return bike route
 // this is the PUT request that updates the rentals table with the new location_id and end_time
 
-app.put("/taco/:bike_code", async (req, res) => {
+app.put("/return/:bike_code", async (req, res) => {
   try {
     const bike_code = req.params.bike_code;
     const location_id = req.body.location_id;
+    const bike_id = await db.query(
+      "SELECT bike_id FROM rentals WHERE bike_code = $1",
+      [bike_code]
+    );
     const update = await db.query(
       "UPDATE rentals SET location_id = $1, end_time = NOW(), rental_time = EXTRACT(EPOCH FROM NOW() - start_time) WHERE bike_code = $2 RETURNING *",
       [location_id, bike_code]
+    );
+    await db.query(
+      "UPDATE bikes SET location_id = $1, available = true WHERE id = $2 RETURNING *",
+      [location_id, bike_id.rows[0].bike_id]
     );
     res.json(update.rows[0]);
   } catch (err) {

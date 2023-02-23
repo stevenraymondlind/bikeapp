@@ -125,7 +125,7 @@ export function Reserve() {
         /> */}
       </div>
       <div>
-        <select onChange={handleFindLocations} value={selectedHubLocation}>
+        <select onChange={handleFindLocations}>
           <option value="" disabled selected hidden>
             Select a location hub
           </option>
@@ -143,7 +143,7 @@ export function Reserve() {
           <option key="-1" value="-1" />
           {bikes.map((bike, index) => (
             <option key={index} value={bike.id}>
-              {bike.name}
+              {bike.id}
             </option>
           ))}
         </select>

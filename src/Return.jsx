@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReportDamage } from "./ReportDamage";
 
 export function Return() {
@@ -8,6 +8,23 @@ export function Return() {
   const [locationId, setLocationId] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [locations, setLocations] = useState([]);
+  const [bikes, setBikes] = useState([]);
+
+  useEffect(() => {
+    handleSearchLocations();
+  }, []);
+
+  function handleSearchLocations() {
+    fetch("http://localhost:3333/locations")
+      .then((response) => response.json())
+      .then((data) => {
+        setLocations(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   function handleReturn(e) {
     e.preventDefault();
@@ -27,7 +44,7 @@ export function Return() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`http://localhost:3333/taco/${bikeCode}`, {
+    fetch(`http://localhost:3333/return/${bikeCode}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -43,6 +60,19 @@ export function Return() {
       });
   }
 
+  function handleFindLocations(e) {
+    setLocationId(e.target.value);
+
+    fetch(`http://localhost:3333/bikes2/${e.target.value}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setBikes(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <>
       <div className="returnBike">
@@ -53,6 +83,7 @@ export function Return() {
             placeholder="Enter bike code"
             value={bikeCode}
             onChange={(e) => setBikeCode(e.target.value)}
+            required
           />
           <button type="submit">Submit Bike Code</button>
         </form>
@@ -62,18 +93,38 @@ export function Return() {
               <label htmlFor="locationId">
                 Choose Location where you are returning bike:
               </label>
+              <div>
               <select
                 id="locationId"
                 name="locationId"
                 value={locationId}
+                onChange={handleFindLocations}
+                required >
+          
+          <option value="" disabled selected hidden>
+            Select a location hub
+          </option>
+          <option key="-1" value="-1" />
+          {locations.map((location, index) => (
+            <option key={index} value={location.id}>
+              {location.hub_location}
+            </option>
+          ))}
+        </select>
+          </div>
+              {/* <select
+                id="locationId"
+                name="locationId"
+                value={locationId}
                 onChange={(e) => setLocationId(e.target.value)}
+                required
               >
                 <option value="">Select location</option>
                 <option value="1">Hub 1 - Parc du Mount Royal</option>
                 <option value="2">Hub 2 - Vieux-Port</option>
                 <option value="3">Hub 3 - Parc La Fontaine</option>
                 <option value="4">Hub 4 - Berri-UQAM</option>
-              </select>
+              </select> */}
               <button type="submit">Return Bike</button>
             </form>
 {showMessage ? (

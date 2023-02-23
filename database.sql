@@ -86,7 +86,6 @@ CREATE TABLE IF NOT EXISTS public.rentals
     start_time timestamp without time zone,
     end_time timestamp without time zone,
     CONSTRAINT rentals_pkey PRIMARY KEY (id),
-    CONSTRAINT rentals_bike_id_key UNIQUE (bike_id),
     CONSTRAINT rentals_bike_id_fkey FOREIGN KEY (bike_id)
         REFERENCES public.bikes (id) MATCH SIMPLE
         ON UPDATE NO ACTION

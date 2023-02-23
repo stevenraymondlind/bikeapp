@@ -13,7 +13,7 @@ export function Navbar() {
   return (
     <nav className="nav">
       <a href="/" className="site-title">
-        BIKES
+        HOME
       </a>
 
       {auth ? (
