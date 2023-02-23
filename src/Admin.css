@@ -1,0 +1,168 @@
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 50px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 30px;
+}
+
+table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 1px solid rgb(5, 4, 4);
+  text-align: center;
+}
+
+th {
+  background-color: rgb(173, 167, 167);
+  border: 1px solid #999;
+  padding: 9px;
+  text-align: center;
+  font-size: 16px;
+}
+
+td {
+  border: 1px solid rgb(169, 120, 120);
+  padding: 9px;
+  text-align: left;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #a0b6c2;
+}
+
+input {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  border: none;
+  padding: 25px 0;
+  margin: 0.5px 0.5px;
+  cursor: pointer;
+  width: 90%;
+}
+
+.update-unavailable-button {
+  background-color: #f17474;
+  color: white;
+  padding: 1px 5px;
+  border: none;
+  cursor: pointer;
+  width: 90%;
+  margin: 10px;
+}
+.update-available-button {
+  background-color: #3ddd31;
+  color: white;
+  padding: 1px 5px;
+  margin: 0.5px 0.5px;
+  border: none;
+  cursor: pointer;
+  width: 90%;
+}
+
+.update-button:hover {
+  background-color: #f75d5d;
+}
+
+.update-bike-location-button {
+  margin: 1rem;
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #3090e4;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 200;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 60%;
+}
+
+.update-bike-location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 1rem;
+  padding: 0;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 200;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.show-button {
+  border: none;
+  padding: 5px 0;
+  margin: 5px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.add-button {
+  background-color: #3ddd31;
+  color: white;
+  padding: 1px 5px;
+  margin: 0.5px 0.5px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.admin-login h1,
+.admin-login p,
+.admin-login form {
+  margin: 0.5rem;
+}
+
+input[type="password"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"] {
+  background-color: #3ddd31;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+p.error {
+  color: red;
+  margin-top: 1rem;
+}
