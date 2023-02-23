@@ -94,12 +94,6 @@ export function Admin() {
   };
 
   function chooseeBikeLocation(e) {
-    fetch(`http://localhost:3333/bikes/${e.target.value}`)
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error(error);
-      });
-    console.log("target", e.target.value);
     setSelectedHubLocation(e.target.value);
   }
 

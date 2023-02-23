@@ -445,6 +445,7 @@ app.post("/bikes", (req, res) => {
   });
 });
 
+//admin update bike location
 app.patch("/bikes/:id", (req, res) => {
   console.log("updating bike to location", req.params.id);
   const id = req.params.id;
@@ -483,6 +484,7 @@ app.put("/bikesreport/:id", async (req, res) => {
     res.status(500).send(`Error updating bike damage`);
   }
 });
+
 
 app.listen(3333, () => {
   console.log("Server listening on port 3333");
