@@ -41,11 +41,13 @@ export function Reserve() {
   }
 
   function handleFindLocations(e) {
+    console.log(e.target.value, "e.target.value");
     setSelectedHubLocation(e.target.value);
 
     fetch(`http://localhost:3333/bikes2/${e.target.value}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setBikes(data);
       })
       .catch((error) => {
@@ -139,10 +141,10 @@ export function Reserve() {
       </div>
       <div>
         <h3>Choose your Bike</h3>
-        <select onChange={handleFindBikes} defaultValue="">
+        <select onChange={handleFindBikes} defaultValue="" required>
           <option key="-1" value="" />
           {bikes.map((bike, index) => (
-            <option key={index} value={bike.id}>
+            <option key={index} value={bike.id} required>
               {bike.id}
             </option>
           ))}

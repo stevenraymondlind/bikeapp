@@ -277,11 +277,12 @@ app.get("/locations", (req, res) => {
 });
 // this is for returning bikes
 app.get("/bikes2/:location_id", async (req, res) => {
+  console.log("params",req.params.location_id);
   const location_id = req.params.location_id;
   const query = `SELECT id, name, location_id from bikes 
-  where location_id = ${location_id} and available = true and damage = false`;
+  where location_id = $1 AND available = true AND (damage = false OR damage IS NULL)`;
   try {
-    const result = await db.query(query);
+    const result = await db.query(query, [location_id]);
     res.json(result.rows);
   } catch (err) {
     console.error(err);

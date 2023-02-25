@@ -1,1 +1,3 @@
 # bikeapp
+
+admin password: bixi

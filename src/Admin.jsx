@@ -187,9 +187,10 @@ export function Admin() {
 
   return (
     <>
-      <h2>
-        <strong>Admin Inventory and Transactions Tables</strong>
-      </h2>
+      <h1>
+        <strong>Admin Page</strong>
+      </h1>
+      <h5>Manage bike inventory, update hub locations and view rental transactions and users tables</h5>
       <h2>Bikes</h2>
       <input
         type="text"
